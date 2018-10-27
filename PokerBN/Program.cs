@@ -10,26 +10,34 @@ namespace PokerBN
     {
         static void Main(string[] args)
         {
-            int numOfPlayers = 0, i = 0;
-            Poker p = new Poker();
-            Console.Write("How many players? : ");
-            numOfPlayers = Int32.Parse(Console.ReadLine());
-            while (i < numOfPlayers)
+            try
             {
-                Console.Write("{0} Player Name : ", i + 1); string player = Console.ReadLine();
-                if (p.CheckPlayer(player))
+                int numOfPlayers = 0, i = 0;
+                Poker p = new Poker();
+                Console.Write("How many players? : ");
+                numOfPlayers = Int32.Parse(Console.ReadLine());
+                while (i < numOfPlayers)
                 {
-                    Console.WriteLine("This player name exists, please enter a unique name to identify");
-                    continue;
+                    Console.Write("{0} Player Name : ", i + 1); string player = Console.ReadLine();
+                    if (p.CheckPlayer(player))
+                    {
+                        Console.WriteLine("This player name exists, please enter a unique name to identify");
+                        continue;
+                    }
+                    Console.Write("{0} Player Hand : ", i + 1); string hand = Console.ReadLine();
+                    p.AddPlayer(player, hand);
+                    i++;
                 }
-                Console.Write("{0} Player Hand : ", i + 1); string hand = Console.ReadLine();
-                p.AddPlayer(player, hand);
-                i++;
-            }
 
-            string winner = p.FindWinner();
-            Console.WriteLine(winner + " wins");
-            Console.ReadLine();
+                string winner = p.FindWinner();
+                Console.WriteLine(winner + " wins");
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
+            }
         }
     }
 }

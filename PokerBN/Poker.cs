@@ -11,13 +11,15 @@ namespace PokerBN
     {
         public int Rank { get; set; }
         public char Suit { get; set; }
-
+        char[] suits = new char[] { 'H', 'C', 'D', 'S' };
         public Card() { }
 
         public Card(int p1, char p2)
         {
             Rank = p1;
             Suit = p2;
+            if (!suits.Contains(Suit))
+                throw new KeyNotFoundException();
         }
     }
 
@@ -47,6 +49,8 @@ namespace PokerBN
                 card.Add(c);
             }
             card.Sort((x, y) => x.Rank.CompareTo(y.Rank));
+            if (card.Count != 5)
+                throw new Exception("Each player should have 5 cards");
         }
         public void setFlush(int p1) { Flush = p1; }
         public int getFlush() { return Flush; }
@@ -93,8 +97,17 @@ namespace PokerBN
 
         public int getRank(string _rank)
         {
-            cardRanks.TryGetValue(_rank, out int val);
-            return val;
+            try
+            {
+                if (cardRanks.TryGetValue(_rank, out int val))
+                    return val;
+                else
+                    throw new KeyNotFoundException();
+            }
+            catch (KeyNotFoundException)
+            {
+                throw new Exception("Ranking is wrong/no such card type");
+            }
         }
 
         public void CreateRankings()
@@ -137,7 +150,7 @@ namespace PokerBN
 
         private bool Comparator(int src)
         {
-            int j = 0;
+            int j = 0, tmp = 0;
             tie = true;
 
             foreach (KeyValuePair<string, Player> g in users)
@@ -152,6 +165,7 @@ namespace PokerBN
                 }
                 else
                 {
+                    tmp = 0;
                     for (j = HAND_SIZE - 1; j >= 0; j--)
                     {
                         if (g.Value._hand.card[j].Rank > users[winner]._hand.card[j].Rank)
@@ -162,7 +176,9 @@ namespace PokerBN
                         }
                         else if (g.Value._hand.card[j].Rank == users[winner]._hand.card[j].Rank)
                         {
+                            tmp++;
                             tie = true;
+                            if (tmp == HAND_SIZE) winner += ", " + g.Key;
                         }
                         else
                         {
@@ -174,6 +190,8 @@ namespace PokerBN
             }
             if (winner == "")
                 return false;
+            if (src == 0 && tie == true)
+                return true;
             if (tie)
                 return false;
 
