@@ -1,0 +1,7 @@
+C:\Users\house\source\repos\PokerBN\PokerBN\bin\Debug\PokerBN.exe.config
+C:\Users\house\source\repos\PokerBN\PokerBN\bin\Debug\PokerBN.exe
+C:\Users\house\source\repos\PokerBN\PokerBN\bin\Debug\PokerBN.pdb
+C:\Users\house\source\repos\PokerBN\PokerBN\obj\Debug\PokerBN.csprojResolveAssemblyReference.cache
+C:\Users\house\source\repos\PokerBN\PokerBN\obj\Debug\PokerBN.csproj.CoreCompileInputs.cache
+C:\Users\house\source\repos\PokerBN\PokerBN\obj\Debug\PokerBN.exe
+C:\Users\house\source\repos\PokerBN\PokerBN\obj\Debug\PokerBN.pdb
