@@ -35,10 +35,10 @@ namespace PokerBN
 
         public Hand(string p1)
         {
-            seperate(p1);
+            separate(p1);
         }
 
-        public void seperate(string s)
+        public void separate(string s)
         {
             CardRanks cr = new CardRanks();
 
